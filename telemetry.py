@@ -40,10 +40,30 @@ def validate_sample(sample):
     # you are checking a single record inside each sample
 
     # must be dict
+    if not isinstance(sample, dict):
+        raise ValueError("sample must be a dictionary")
+    
     # must contain timestamp, channel, and value
+    required_fields = {"timestamp", "channel", "value"}
+    missing = required_fields - sample.keys()
+
+    if missing:
+        raise ValueError(f"Missing required fields: {missing}")
+
     # timestamp but be an integer
+    if sample['value'] is not math.isfinite(value):
+        raise ValueError("timestamp must be an integer")
+
     # channel must be a string with one or more characters
+    if not isinstance(sample["channel"], str):
+        raise ValueError("channel not type string")
+    
+    if not sample["channel"].strip():
+        raise ValueError("Channel name cannot be empty or whitespace")
+
     # value must be an int or float
+    if not isinstance(sample["value"], (int, float)):
+        raise ValueError("Value must be an int or float")
 
 def find_violations(samples, rules):
 
