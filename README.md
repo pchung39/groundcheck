@@ -1,7 +1,11 @@
 ```
-  ┌──┐
-  │▣ │  GROUNDCHECK
-  └──┘  preflight for telemetry
+         ___
+      __/   \__
+     /    ▲    \
+    |  GROUND   |
+    |   CHECK   |
+     \_________/
+      preflight
 ```
 
 ## What GroundCheck does

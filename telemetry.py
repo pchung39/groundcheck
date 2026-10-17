@@ -51,7 +51,7 @@ def validate_sample(sample):
         raise ValueError(f"Missing required fields: {missing}")
 
     # timestamp but be an integer
-    if sample['value'] is not math.isfinite(value):
+    if not isinstance(sample["timestamp"], int):
         raise ValueError("timestamp must be an integer")
 
     # channel must be a string with one or more characters
@@ -64,6 +64,9 @@ def validate_sample(sample):
     # value must be an int or float
     if not isinstance(sample["value"], (int, float)):
         raise ValueError("Value must be an int or float")
+
+    if not math.isfinite(sample["value"]):
+        raise ValueError("value must be finite")
 
 def find_violations(samples, rules):
 
@@ -95,7 +98,6 @@ def find_violations(samples, rules):
     }
     missing_channels = sorted(required_channels - present_channels)
 
-    print(violations)
     return missing_channels, violations
 
 def get_verdict(violations, missing_channels):
